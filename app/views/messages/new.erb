@@ -1,0 +1,11 @@
+Reply to post:
+
+<h4><%=  @request.title %></h4>
+<h4>From: <%= @user.email %></h4>
+<%= form_tag({controller: "messages", action: "create"}, method: :post) do %>
+    <%= hidden_field_tag :subject, @request.title %>
+    <%= label :body, "Message text" %>
+    <%= text_area_tag :body %>
+    <%= hidden_field_tag(:user, "#{@user.id}") %>
+    <%= submit_tag 'Send message', class: "btn btn-primary" %>
+<% end %>

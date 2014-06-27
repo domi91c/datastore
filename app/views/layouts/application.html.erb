@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GoFavorIt</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="http://i.icomoon.io/public/temp/4d3f767796/UntitledProject2/style.css">
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+  <div class="container-fluid">
+
+    <div class="pull-left ">
+      <!-- <div class="nav-header">
+         <div class="navlogo"></div>
+
+         < % if user_signed_in? % >
+           <div class="requestname"><strong>< %= current_user.username % ></strong></div>
+       < % end % >
+       </div>-->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+
+      </button>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Favors... <b class="caret"></b></a>
+          <ul class="btn-group select select-block mbl">
+            <li><%= link_to "View Offers", offers_path %></li>
+            <li><%= link_to "Add Offer", new_offer_path %></li>
+            <li><%= link_to "View Requests", requests_path %></li>
+            <li><%= link_to "Add Request", new_request_path %></li>
+          </ul>
+        </li>
+        <li><%= link_to "Inbox", conversations_path %></li>
+        <li><%= link_to "Profile", profiles_path %></li>
+        <li><a href="#">Help</a></li>
+
+        <% if user_signed_in? %>
+            <li class="active"><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+            <li class="active"><%= link_to "Sign In", new_user_session_path %></li>
+        <% end %>      </ul>
+      <% if user_signed_in? %>
+
+
+          <div class="navlogo">
+
+          </div>
+          <%= current_user.try(:email)%>
+
+
+      <% end %>
+
+
+      <form class="navbar-form navbar-right">
+        <%= form_tag(offers_path, :method => :get) do %>
+            <%= text_field_tag :search, nil,
+                               {:id => "search-query-2", :placeholder => "Search offers..."} %>
+            <%= hidden_field_tag :use_keywords, "true" %>
+            <%= hidden_field_tag :wide_search, "true" %>
+        <% end %>
+      </form>
+    </div>
+  </div>
+  <div id="headerbar2">
+
+  </div>
+
+</nav>
+
+<div style="padding-top: 60px; ">
+
+</div>
+
+<!--<div class="logo page-header">-->
+
+<!--</div>-->
+<div class="headerbar2">
+  <p class="alert alert-success"><%= notice %></p>
+  <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+</div>
+<div class="col-sm-3 col-md-2 sidebar-offcanvas well" id="sidebar" role="navigation">
+  <ul class="nav nav-list">
+    <li class="nav-header">Categories</li>
+    <li><%= link_to "Labor", requests_path %></li>
+    <li><%= link_to "Carpooling", offers_path %></li>
+    <li><%= link_to "Tutoring", requests_path %></li>
+    <li><%= link_to "Art", conversations_path %></li>
+    <li><%= link_to "Career", conversations_path %></li>
+    <li><%= link_to "Delivery", conversations_path %></li>
+    <li><%= link_to "Learning", conversations_path %></li>
+    <li><%= link_to "Labor", requests_path %></li>
+    <li><%= link_to "Carpooling", offers_path %></li>
+    <li><%= link_to "Tutoring", requests_path %></li>
+    <li><%= link_to "Art", conversations_path %></li>
+    <li><%= link_to "Career", conversations_path %></li>
+    <li><%= link_to "Delivery", conversations_path %></li>
+    <li><%= link_to "Learning", conversations_path %></li>
+
+
+
+  </ul>
+
+</div>
+
+
+<div class="col-sm-9 col-md-10 main">
+  <%= yield :scripts %>
+  <%= yield %>
+
+</div>
+
+
+<footer>
+  <p class="pull-right">©2014 Lunar FX</p>
+</footer>
+
+</body>
+</html>
